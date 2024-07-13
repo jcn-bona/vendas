@@ -15,4 +15,11 @@ export class CategoriaService {
     return this.http.get<Categoria[]>(environment.api + 'categories')
   }
 
+  public save(categoria: Categoria): Observable<Categoria> {
+    if (categoria.id) {
+      return this.http.put<Categoria>(environment.api + 'categories/' + categoria.id, categoria)
+    } else { 
+      return this.http.post<Categoria>(environment.api + 'categories', categoria)
+    }  
+  }
 }

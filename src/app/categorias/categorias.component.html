@@ -1,14 +1,21 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Categorias</mat-card-title>
-    <mat-card-subtitle>Listagem de todas as categorias</mat-card-subtitle>
+    <mat-card-title>
+      Categorias:
+      <span style="color:chocolate;">&nbsp;{{ status }}</span>
+    </mat-card-title>
   </mat-card-header>
-  <mat-card-actions style="display: flex; justify-content: right; padding-right: 13px;">
-      <button  mat-raised-button color="primary" (click)="onNewCategoryClick()">{{ nameButton }}</button>
+  <br>
+  <mat-divider></mat-divider>
+  <mat-card-actions style="padding-left: 15px;">
+      <mat-slide-toggle color="primary" [(ngModel)]="checked" (click)="onNewCategoriaClick()"><strong>Incluir Categoria</strong></mat-slide-toggle>
   </mat-card-actions>
-
+  <mat-divider></mat-divider>
+  @if(showFormCategoria) {
+    <categoria-form (save)="onSave($event)" [categoria]="categoria" (back)="hideFormCategoria()" ></categoria-form>
+  } 
   <mat-card-content>
-    <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <table mat-table class="full-width-table" matSort aria-label="Elementos">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
         <td mat-cell *matCellDef="let row">{{ row.id }}</td>
@@ -24,11 +31,20 @@
         <td mat-cell *matCellDef="let row">{{ row.description }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="onEditCategoriaClick(row)">
+              <mat-icon matSuffix>edit</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <mat-paginator
-      #Paginator
+      #paginator
       [length]="dataSource.data.length"
       [pageIndex]="0"
       [pageSize]="7"
@@ -37,5 +53,4 @@
     >
     </mat-paginator>
   </mat-card-content>
-  
 </mat-card>

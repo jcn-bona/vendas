@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -11,6 +11,9 @@ import { lastValueFrom } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { CategoriaFormComponent } from './form/form.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-categorias',
@@ -18,15 +21,8 @@ import { MatInputModule } from '@angular/material/input';
   styles: `.full-width-table {width: 100%;}`,
   standalone: true,
   imports: [
-    MatTableModule, 
-    MatPaginatorModule, 
-    MatSortModule, 
-    MatCardModule, 
-    MatButtonModule, 
-    MatIconModule, 
-    CategoriaFormComponent,
-    MatInputModule
-
+    MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, MatIconModule, 
+    CategoriaFormComponent, MatInputModule, MatSlideToggleModule, FormsModule, MatDividerModule
   ]
 })
 export class CategoriasComponent implements AfterViewInit {
@@ -35,24 +31,44 @@ export class CategoriasComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<CategoriasItem>;
 
   dataSource = new MatTableDataSource<Categoria>();
-  displayedColumns = ['id', 'name', 'description'];
+  displayedColumns = ['id', 'name', 'description', 'action'];
   showFormCategoria: boolean = false;
   labelButtonCategoria: string = 'Nova Categoria';
+  categoria!: Categoria;
+  checked: boolean = false;
+  status: String = 'Listagem'
 
   constructor(private categoriaService: CategoriaService) {}
+  
+  hideFormCategoria(): void {
+    this.showFormCategoria = false;
+    this.status = 'Listagem';
+  }
+
+  onEditCategoriaClick(categoria: Categoria): void {
+    this.categoria = categoria;
+    this.showFormCategoria = true;
+    this.checked = false;
+    this.status = 'Edição'
+  }
 
   ngAfterViewInit(): void {
     this.loadCategorias();
   }
 
-  onNewCategoryClick(): void {
+  async onSave(categoria: Categoria): Promise<void> {
+    const saved = await lastValueFrom(this.categoriaService.save(categoria));
+    this.loadCategorias();
+  }
+
+  onNewCategoriaClick(): void {
     if (this.showFormCategoria) {
       this.showFormCategoria = false;
-      this.labelButtonCategoria = 'Nova Categoria';
+      this.status = 'Listagem';
     } else {
       this.showFormCategoria = true;
-      //this.category = {id: 0, name: '', description: ''}
-      this.labelButtonCategoria = 'Fechar Nova Categoria';
+      this.categoria = {id: 0, name: '', description: ''}
+      this.status = 'Inclusão';
     }
   }
 
