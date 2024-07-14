@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -33,7 +33,6 @@ export class CategoriasComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Categoria>();
   displayedColumns = ['id', 'name', 'description', 'action'];
   showFormCategoria: boolean = false;
-  labelButtonCategoria: string = 'Nova Categoria';
   categoria!: Categoria;
   checked: boolean = false;
   status: String = 'Listagem'

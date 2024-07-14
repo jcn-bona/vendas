@@ -15,9 +15,14 @@ import { Categoria } from '../categoria.dto';
 })
 export class CategoriaFormComponent {
   @ViewChild('form') form : NgForm;
+  
   @Output() save = new EventEmitter<Categoria>();
+  
   @Output() back = new EventEmitter();
-  @Input() set categoria(categoria: Categoria) {this.categoriaForm.setValue(categoria)};
+  
+  @Input() set categoria(categoria: Categoria) {
+    this.categoriaForm.setValue(categoria)
+  };
 
   private fb = inject(FormBuilder)
 
