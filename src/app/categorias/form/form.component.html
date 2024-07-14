@@ -23,12 +23,10 @@
       </mat-form-field>
     </div>
     <div class="container">
-      <button mat-raised-button color="warn" (click)="onBack()">
-        <mat-icon>cancel</mat-icon>
+      <button style="padding: 5px 15px 5px 15px" (click)="onBack()">
         Fechar
       </button>
-      <button mat-raised-button color="accent" type="submit" [disabled]="!categoriaForm.valid">
-        <mat-icon>save</mat-icon>
+      <button style="padding: 5px 15px 5px 15px" type="submit" [disabled]="!categoriaForm.valid">
         Salvar
       </button>
     </div>

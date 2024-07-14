@@ -1,16 +1,17 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      Categorias:
-      <span style="color:chocolate;">&nbsp;{{ status }}</span>
+      Categorias: <span style="color:chocolate;">&nbsp;{{ status }}&nbsp;&nbsp;</span>  
     </mat-card-title>
-  </mat-card-header>
-  <br>
-  <mat-divider></mat-divider>
-  <mat-card-actions style="padding-left: 15px;">
-      <mat-slide-toggle color="primary" [(ngModel)]="checked" (click)="onNewCategoriaClick()"><strong>Incluir Categoria</strong></mat-slide-toggle>
+  </mat-card-header>  
+  <mat-card-actions 
+    style="display: flex; justify-content: right; position: absolute; padding-left: 90%;">
+    <button style="padding: 5px 5px 5px 5px" (click)="onNewCategoriaClick()" [disabled]="showFormCategoria">
+      Incluir Categoria
+    </button>
   </mat-card-actions>
-  <mat-divider></mat-divider>
+  <br/>
+  <mat-divider/>
   @if(showFormCategoria) {
     <categoria-form (save)="onSave($event)" [categoria]="categoria" (back)="hideFormCategoria()" ></categoria-form>
   } 
