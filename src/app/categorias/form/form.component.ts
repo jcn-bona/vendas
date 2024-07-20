@@ -20,10 +20,6 @@ export class CategoriaFormComponent {
   
   @Output() back = new EventEmitter();
   
-  @Input() set categoria(categoria: Categoria) {
-    this.categoriaForm.setValue(categoria)
-  };
-
   private fb = inject(FormBuilder)
 
   categoriaForm = this.fb.group({
@@ -32,10 +28,13 @@ export class CategoriaFormComponent {
     description: ['', Validators.required]
   })
 
+  @Input() set categoria(categoria: Categoria) {
+    this.categoriaForm.setValue(categoria)
+  };
+
   onSubmit(): void {
-    // Manda os dados para o form pai (categorias.component)
-    this.save.emit(this.categoriaForm.value as Categoria) 
-    this.form.resetForm();
+    this.save.emit(this.categoriaForm.value as Categoria) // Manda os dados para o form pai
+    this.form.resetForm(); // Limpa o form após submissão
     this.back.emit();
   }
   

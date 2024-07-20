@@ -18,16 +18,16 @@ import { RouterOutlet } from '@angular/router';
     styleUrl: './home.component.css',
     standalone: true,
     imports: [
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatListModule,
-        MatIconModule,
-        AsyncPipe,
-        MenuComponent,
-        CategoriasComponent,
-        RouterOutlet
-    ]
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    AsyncPipe,
+    MenuComponent,
+    CategoriasComponent,
+    RouterOutlet,
+]
 })
 export class HomeComponent {
 

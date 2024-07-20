@@ -6,7 +6,7 @@
   </mat-card-header>  
   <mat-card-actions 
     style="display: flex; justify-content: right; position: absolute; padding-left: 90%;">
-    <button style="padding: 5px 5px 5px 5px" (click)="onNewCategoriaClick()" [disabled]="showFormCategoria">
+    <button style="padding: 0px 5px 0px 5px" (click)="onNewCategoriaClick()" [disabled]="showFormCategoria">
       Incluir Categoria
     </button>
   </mat-card-actions>
@@ -38,6 +38,10 @@
             <button mat-button (click)="onEditCategoriaClick(row)">
               <mat-icon matSuffix>edit</mat-icon>
             </button>
+            <button mat-raised-button (click)="openModal(row)" >
+              <mat-icon matSuffix>delete</mat-icon>
+            </button>
+
         </td>
       </ng-container>
 
