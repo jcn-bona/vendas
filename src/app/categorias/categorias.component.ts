@@ -42,6 +42,8 @@ export class CategoriasComponent implements AfterViewInit {
   confirmationService = inject(ConfirmationDialogService);
 
   openModal(categoria: Categoria){
+    this.checked = false;
+    this.status = 'Exclusão'
     this.confirmationService.confirm(
       "Confirma a exclusão do registro abaixo?", 
       'Categoria: ' + categoria.id + ' ' + categoria.name + ' ' + categoria.description, 
@@ -49,9 +51,21 @@ export class CategoriasComponent implements AfterViewInit {
       "Cancela"
     )
     .then((confirmed) => {
-      this.deleteCategoria(categoria)
+      if (confirmed) {
+        this.deleteCategoria(categoria)
+      }  
     })
-    .catch(() => console.log('teste'))// Esta parte é executada se o usuário dispensar o modal clicando fora dele ou através do botão close (x).
+    .catch(() => console.log('teste')
+    )// Esta parte é executada se o usuário dispensar o modal clicando fora dele ou através do botão close (x).
+    .then(() => {
+      this.checked = false;
+      this.status = 'Edição'
+    })
+  }
+  
+  async deleteCategoria(categoria:Categoria) {
+    await lastValueFrom(this.categoriaService.delete(categoria.id))
+    this.loadCategorias();
   }
   
   hideFormCategoria(): void {
@@ -66,12 +80,12 @@ export class CategoriasComponent implements AfterViewInit {
     this.status = 'Edição'
   }
 
-  deleteCategoria(categoria: Categoria): void {
-    this.categoria = categoria;
-    //this.showFormCategoria = true;
-    this.checked = false;
-    this.status = 'Exclusão'
-  }
+//  deleteCategoria(categoria: Categoria): void {
+//   this.categoria = categoria;
+//   //this.showFormCategoria = true;
+//    this.checked = false;
+//    this.status = 'Exclusão'
+//  }
 
   ngAfterViewInit(): void {
     this.loadCategorias();
