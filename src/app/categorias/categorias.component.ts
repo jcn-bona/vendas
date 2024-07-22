@@ -1,28 +1,21 @@
 import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
-import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSortModule, MatSort } from '@angular/material/sort';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { Categoria } from '../categorias/categoria.dto'
 import { CategoriasItem } from './categorias-datasource';
 import { CategoriaService } from './categoria.service';
 import { lastValueFrom } from 'rxjs';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FormsModule } from '@angular/forms';
-import { MatDividerModule } from '@angular/material/divider';
 import { CategoriaFormComponent } from "./form/form.component";
 import { ConfirmationDialogService } from '../shared/services/confirmation-dialog/confirmation-dialog.service';
+import { MaterialModule } from '../material.module';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
   styles: `.full-width-table {width: 100%;}`,
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, MatIconModule,
-    MatInputModule, MatSlideToggleModule, FormsModule, MatDividerModule, CategoriaFormComponent]
+  imports: [MaterialModule, CategoriaFormComponent]
 })
 export class CategoriasComponent implements AfterViewInit {
 
@@ -80,12 +73,6 @@ export class CategoriasComponent implements AfterViewInit {
     this.status = 'Edição'
   }
 
-//  deleteCategoria(categoria: Categoria): void {
-//   this.categoria = categoria;
-//   //this.showFormCategoria = true;
-//    this.checked = false;
-//    this.status = 'Exclusão'
-//  }
 
   ngAfterViewInit(): void {
     this.loadCategorias();

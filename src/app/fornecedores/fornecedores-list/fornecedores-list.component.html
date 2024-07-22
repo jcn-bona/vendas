@@ -1,0 +1,17 @@
+<mat-card-subtitle> Listagem de fornecedores </mat-card-subtitle>
+@if (fornecedoresObservable | async) {
+<div class="container wrap">
+    @for( fornecedor of fornecedores; track fornecedor.id) {
+    <mat-card class="item">
+        <mat-card-content>
+            <mat-card-subtitle>{{fornecedor.companyName}}</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+    }
+</div>
+} @else {
+
+}
+<mat-card-actions align="end">
+    <button mat-button [routerLink]="['/fornecedores/novo']">Novo</button>
+</mat-card-actions>

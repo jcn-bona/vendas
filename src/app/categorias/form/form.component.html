@@ -6,10 +6,10 @@
         <input matInput formControlName="name"/>
         <mat-icon matSuffix>edit</mat-icon>
         @if (categoriaForm.controls['name'].hasError('required')) {
-          <mat-error>Nome é obrigatório!</mat-error> 
+          <mat-error><strong>Nome é obrigatório!</strong></mat-error> 
         }
         @if (categoriaForm.controls['name'].hasError('minlength')) {
-          <mat-error>Nome muito pequeno!</mat-error> 
+          <mat-error><strong>Nome muito pequeno!</strong></mat-error> 
         }
       </mat-form-field>
 
