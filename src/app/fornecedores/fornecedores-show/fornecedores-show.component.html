@@ -1,1 +1,46 @@
-<p>fornecedores-show works!</p>
+@if (fornecedorObservable | async) {
+<mat-card-content>
+    <mat-card-title>
+        Fornecedor 
+    </mat-card-title>
+    <mat-card-subtitle>
+        <strong><h1 style="color: brown;">{{ fornecedor.companyName }} </h1></strong>
+    </mat-card-subtitle>
+    <br>
+    <div>
+        <dl>
+            <dt>Contact</dt>
+            <dd>{{ fornecedor.contactName }}</dd>
+        </dl>
+        <dl>
+            <dt>Street</dt>
+            <dd>{{ fornecedor.address?.street }}</dd>
+        </dl>
+        <dl>
+            <dt>Location</dt>
+            <dd>
+                {{ fornecedor.address?.city }}, {{ fornecedor.address?.region }} - {{
+                fornecedor.address?.country }}
+            </dd>
+        </dl>
+        <dl>
+            <dt>PO Box</dt>
+            <dd>{{ fornecedor.address?.postalCode }}</dd>
+        </dl>
+        <dl>
+            <dt>Phone</dt>
+            <dd>{{ fornecedor.address?.phone }}</dd>
+        </dl>
+    </div>
+</mat-card-content>
+<mat-card-actions class="container">
+    <button mat-button [routerLink]="['/fornecedores']">Voltar</button>
+    <div class="width-full"></div>
+    <button mat-raised-button color="primary" [routerLink]="['/fornecedores/edit/',fornecedor.id]">
+        Edit
+    </button>
+    <button mat-button [routerLink]="['/fornecedores/del/',fornecedor.id]">
+        Delete
+    </button>
+</mat-card-actions>
+}

@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
+    styles: ``,
     imports: [CommonModule, RouterOutlet, MatButtonModule, MatSlideToggle, HomeComponent]
 })
 export class AppComponent {

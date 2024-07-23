@@ -5,11 +5,12 @@ import { Fornecedor } from '../fornecedor.dto'
 import { FornecedorService } from './../fornecedor.service'
 import { AsyncPipe } from '@angular/common'
 import { RouterLink } from '@angular/router'
+import { FornecedorCardComponent } from "./fornecedor-card/fornecedor-card.component";
 
 @Component({
   selector: 'app-suppliers-list',
   standalone: true,
-  imports: [MaterialModule, RouterLink, AsyncPipe],
+  imports: [MaterialModule, RouterLink, AsyncPipe, FornecedorCardComponent],
   templateUrl: './fornecedores-list.component.html',
   styles: ``
 })

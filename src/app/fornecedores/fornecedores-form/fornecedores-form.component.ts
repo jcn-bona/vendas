@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './fornecedores-form.component.html',
-  styleUrl: './fornecedores-form.component.css'
+  styles: ``
 })
 export class FornecedoresFormComponent {
 

@@ -1,16 +1,15 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
+    <mat-card-title style="padding-left: 25px;padding-top: 15px;">
       Categorias: <span style="color:chocolate;">&nbsp;{{ status }}&nbsp;&nbsp;</span>  
+      <span style="padding-left: 65%;">
+        <button mat-raised-button (click)="onNewCategoriaClick()" [disabled]="showFormCategoria">
+          Incluir Categoria
+        </button>
+      </span>
+      
     </mat-card-title>
-  </mat-card-header>  
-  <mat-card-actions 
-    style="display: flex; justify-content: right; position: absolute; padding-left: 90%;">
-    <button style="padding: 0px 5px 0px 5px" (click)="onNewCategoriaClick()" [disabled]="showFormCategoria">
-      Incluir Categoria
-    </button>
-  </mat-card-actions>
-  <br/>
+    <br>
+    
   <mat-divider/>
   @if(showFormCategoria) {
     <categoria-form (save)="onSave($event)" [categoria]="categoria" (back)="hideFormCategoria()" ></categoria-form>

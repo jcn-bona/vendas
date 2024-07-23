@@ -1,17 +1,15 @@
-<mat-card-subtitle> Listagem de fornecedores </mat-card-subtitle>
+<mat-card-title>Fornecedores: <span style="color:chocolate;">&nbsp;Listagem&nbsp;&nbsp;</span>  
+    <span style="padding-left: 63%;">
+        <button mat-raised-button [routerLink]="['/fornecedores/novo']">Novo Fornecedor</button>
+   </span>
+</mat-card-title>  
+<hr>
 @if (fornecedoresObservable | async) {
 <div class="container wrap">
     @for( fornecedor of fornecedores; track fornecedor.id) {
-    <mat-card class="item">
-        <mat-card-content>
-            <mat-card-subtitle>{{fornecedor.companyName}}</mat-card-subtitle>
-        </mat-card-content>
-    </mat-card>
-    }
+        <app-fornecedor-card [fornecedor]="fornecedor"></app-fornecedor-card>
+    } @empty {
+        <span>Não existe fornecedor para listar. Use o botão "Novo Fornecedor" para criar um novo</span>
+    }    
 </div>
-} @else {
-
 }
-<mat-card-actions align="end">
-    <button mat-button [routerLink]="['/fornecedores/novo']">Novo</button>
-</mat-card-actions>
