@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './fornecedores-delete.component.html',
-  styles: ``
 })
 export class FornecedoresDeleteComponent {
 

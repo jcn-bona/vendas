@@ -7,7 +7,6 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [MaterialModule, RouterOutlet],
   templateUrl: './fornecedores.component.html',
-  styles: ``,
 })
 export class FornecedoresComponent {
 

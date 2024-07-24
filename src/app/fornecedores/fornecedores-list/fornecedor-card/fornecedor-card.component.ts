@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [MaterialModule, RouterLink],
   templateUrl: './fornecedor-card.component.html',
-  styles: ``
 })
 export class FornecedorCardComponent {
   @Input({required: true}) fornecedor: Fornecedor

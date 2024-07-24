@@ -11,7 +11,6 @@ import { AsyncPipe } from '@angular/common'
   standalone: true,
   imports: [MaterialModule, AsyncPipe, RouterLink],
   templateUrl: './fornecedores-show.component.html',
-  styles: ``
 })
 export class FornecedoresShowComponent implements OnInit {
 

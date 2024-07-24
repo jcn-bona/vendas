@@ -12,7 +12,6 @@ import { FornecedorCardComponent } from "./fornecedor-card/fornecedor-card.compo
   standalone: true,
   imports: [MaterialModule, RouterLink, AsyncPipe, FornecedorCardComponent],
   templateUrl: './fornecedores-list.component.html',
-  styles: ``
 })
 export class FornecedoresListComponent implements OnInit {
 
