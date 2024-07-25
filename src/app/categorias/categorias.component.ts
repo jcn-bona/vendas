@@ -9,13 +9,14 @@ import { MaterialModule } from '../material.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { LoadingBarComponent } from "../loading-bar.component";
 
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
   styles: `.full-width-table {width: 100%;}`,
   standalone: true,
-  imports: [MaterialModule, CategoriaFormComponent]
+  imports: [MaterialModule, CategoriaFormComponent, LoadingBarComponent]
 })
 export class CategoriasComponent implements AfterViewInit {
 
@@ -28,7 +29,8 @@ export class CategoriasComponent implements AfterViewInit {
   showFormCategoria: boolean = false;
   categoria!: Categoria;
   checked: boolean = false;
-  status: String = 'Listagem'
+  status: String = 'Listagem';
+  showLoadingBar: boolean = true;
   
   constructor(private categoriaService: CategoriaService) {}
 
@@ -73,7 +75,6 @@ export class CategoriasComponent implements AfterViewInit {
     this.status = 'Edição'
   }
 
-
   ngAfterViewInit(): void {
     this.loadCategorias();
   }
@@ -95,10 +96,12 @@ export class CategoriasComponent implements AfterViewInit {
   }
 
   async loadCategorias(): Promise<void> {
-    const categorias = await lastValueFrom(this.categoriaService.getAll())
-    this.dataSource = new MatTableDataSource(categorias)
-    this.table.dataSource = this.dataSource
-    this.dataSource.sort = this.sort
-    this.dataSource.paginator = this.paginator
+    this.showLoadingBar = true;
+    const categorias = await lastValueFrom(this.categoriaService.getAll());
+    this.dataSource = new MatTableDataSource(categorias);
+    this.table.dataSource = this.dataSource;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.showLoadingBar = false;
   }
 }

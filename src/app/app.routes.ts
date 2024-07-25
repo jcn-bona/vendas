@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router'
+import { HomeComponent } from './home/home.component'
 import { CategoriasComponent } from './categorias/categorias.component'
 import { FornecedoresComponent } from './fornecedores/fornecedores.component'
 import { FornecedoresListComponent } from './fornecedores/fornecedores-list/fornecedores-list.component'
@@ -8,6 +9,7 @@ import { FornecedoresNewComponent } from './fornecedores/fornecedores-new/fornec
 import { FornecedoresShowComponent } from './fornecedores/fornecedores-show/fornecedores-show.component'
 
 export const routes: Routes = [
+    { path: 'home', component: HomeComponent },
     { path: 'categorias', component: CategoriasComponent },
     { path: 'fornecedores', component: FornecedoresComponent, 
         children: [

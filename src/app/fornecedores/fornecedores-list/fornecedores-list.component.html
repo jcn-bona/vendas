@@ -3,7 +3,7 @@
         <button mat-raised-button [routerLink]="['/fornecedores/novo']">Novo Fornecedor</button>
    </span>
 </mat-card-title>  
-<hr>
+<hr/>
 @if (fornecedoresObservable | async) {
 <div class="container wrap">
     @for( fornecedor of fornecedores; track fornecedor.id) {
