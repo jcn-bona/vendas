@@ -15,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrl: './home.component.css',
+    styleUrl: './home.component.scss',
     standalone: true,
     imports: [MatToolbarModule, MatButtonModule, MatSidenavModule, MatListModule, MatIconModule, AsyncPipe,
               MenuComponent, CategoriasComponent, RouterOutlet,

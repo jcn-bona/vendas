@@ -13,7 +13,7 @@ interface MenuItems {
   imports: [MatListModule, RouterLink],
   template: `
     @for (item of menuItems; track item.path) {
-      <a mat-list-item [routerLink]="item.path">{{ item.label }}</a>
+      <a mat-list-item [routerLink]="item.path" >{{ item.label }}</a>
     }
   `,
   styles: ``
@@ -21,17 +21,17 @@ interface MenuItems {
 export class MenuComponent {
 
   menuItems: Array<MenuItems> = [
-    { 
+    {
       path: '/',
-      label: 'Home' 
+      label: 'Home'
     },
-    { 
+    {
       path: '/categorias',
       label: 'Categorias'
     },
-    { 
-      path: '/fornecedores', 
-      label: 'Fornecedores' 
+    {
+      path: '/fornecedores',
+      label: 'Fornecedores'
     }
   ]
 }

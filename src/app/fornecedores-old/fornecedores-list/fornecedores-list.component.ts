@@ -6,11 +6,12 @@ import { FornecedorService } from './../fornecedor.service'
 import { AsyncPipe } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { FornecedorCardComponent } from "./fornecedor-card/fornecedor-card.component";
+import { LoadingBarComponent } from "../../loading-bar.component";
 
 @Component({
   selector: 'app-suppliers-list',
   standalone: true,
-  imports: [MaterialModule, RouterLink, AsyncPipe, FornecedorCardComponent],
+  imports: [MaterialModule, RouterLink, AsyncPipe, FornecedorCardComponent, LoadingBarComponent],
   templateUrl: './fornecedores-list.component.html',
 })
 export class FornecedoresListComponent implements OnInit {

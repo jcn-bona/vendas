@@ -34,12 +34,12 @@
     </div>
 </mat-card-content>
 <mat-card-actions class="container">
-    <button mat-button [routerLink]="['/fornecedores']">Voltar</button>
+    <button mat-raised-button [routerLink]="['/fornecedores']">Voltar</button>
     <div class="width-full"></div>
     <button mat-raised-button color="primary" [routerLink]="['/fornecedores/edit/',fornecedor.id]">
         Edit
     </button>
-    <button mat-button [routerLink]="['/fornecedores/del/',fornecedor.id]">
+    <button mat-raised-button [routerLink]="['/fornecedores/del/',fornecedor.id]">
         Delete
     </button>
 </mat-card-actions>

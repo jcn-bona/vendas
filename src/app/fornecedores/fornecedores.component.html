@@ -1,5 +1,58 @@
 <mat-card>
-    <mat-card-content>
-        <router-outlet></router-outlet>
-    </mat-card-content>
+    <mat-card-title style="padding-left: 25px;padding-top: 15px;">
+      Fornecedores: <span style="color:chocolate;">&nbsp;{{ status }}&nbsp;&nbsp;</span>
+      <span style="padding-left: 65%;">
+        <button mat-raised-button (click)="onNewFornecedorClick()" [disabled]="showFormFornecedor">
+          Incluir Fornecedor
+        </button>
+      </span>
+    </mat-card-title>
+    <br>
+  <mat-divider/>
+  <loading-bar [visible]="showLoadingBar"></loading-bar>
+  @if(showFormFornecedor) {
+    <fornecedor-form (save)="onSave($event)" [categoria]="categoria" (back)="hideFormFornecedor()" ></fornecedor-form>
+  }
+  <mat-card-content>
+    <table mat-table class="full-width-table" matSort aria-label="Elementos">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+        <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-button (click)="onEditFornecedorClick(row)">
+            <mat-icon matSuffix>edit</mat-icon>
+          </button>
+          <button mat-raised-button (click)="openModal(row)" >
+            <mat-icon matSuffix>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="7"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Selecione a página"
+    >
+    </mat-paginator>
+  </mat-card-content>
 </mat-card>

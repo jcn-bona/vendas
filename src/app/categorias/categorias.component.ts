@@ -4,12 +4,13 @@ import { CategoriasItem } from './categorias-datasource';
 import { CategoriaService } from './categoria.service';
 import { lastValueFrom } from 'rxjs';
 import { CategoriaFormComponent } from "./form/form.component";
-import { ConfirmationDialogService } from '../shared/services/confirmation-dialog/confirmation-dialog.service';
-import { MaterialModule } from '../material.module';
-import { MatPaginator } from '@angular/material/paginator';
+import { ConfirmationDialogService } from '../shared/dialog/confirmation-dialog.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { LoadingBarComponent } from "../loading-bar.component";
+import { LoadingBarComponent } from "../shared/load-bar/loading-bar.component";
+import { MatPaginator } from '@angular/material/paginator';
+import { MaterialModule } from '../shared/material/material.module';
+
 
 @Component({
   selector: 'app-categorias',
@@ -31,7 +32,7 @@ export class CategoriasComponent implements AfterViewInit {
   checked: boolean = false;
   status: String = 'Listagem';
   showLoadingBar: boolean = true;
-  
+
   constructor(private categoriaService: CategoriaService) {}
 
   confirmationService = inject(ConfirmationDialogService);
@@ -40,15 +41,15 @@ export class CategoriasComponent implements AfterViewInit {
     this.checked = false;
     this.status = 'Exclusão'
     this.confirmationService.confirm(
-      "Confirma a exclusão do registro abaixo?", 
-      'Categoria: ' + categoria.id + ' ' + categoria.name + ' ' + categoria.description, 
-      "Confirma", 
+      "Confirma a exclusão do registro abaixo?",
+      'Categoria: ' + categoria.id + ' ' + categoria.name + ' ' + categoria.description,
+      "Confirma",
       "Cancela"
     )
     .then((confirmed) => {
       if (confirmed) {
         this.deleteCategoria(categoria)
-      }  
+      }
     })
     .catch(() => console.log('teste')
     )// Esta parte é executada se o usuário dispensar o modal clicando fora dele ou através do botão close (x).
@@ -57,12 +58,12 @@ export class CategoriasComponent implements AfterViewInit {
       this.status = 'Edição'
     })
   }
-  
+
   async deleteCategoria(categoria:Categoria) {
     await lastValueFrom(this.categoriaService.delete(categoria.id))
     this.loadCategorias();
   }
-  
+
   hideFormCategoria(): void {
     this.showFormCategoria = false;
     this.status = 'Listagem';
@@ -97,6 +98,7 @@ export class CategoriasComponent implements AfterViewInit {
 
   async loadCategorias(): Promise<void> {
     this.showLoadingBar = true;
+
     const categorias = await lastValueFrom(this.categoriaService.getAll());
     this.dataSource = new MatTableDataSource(categorias);
     this.table.dataSource = this.dataSource;
