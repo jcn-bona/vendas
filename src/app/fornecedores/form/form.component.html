@@ -3,22 +3,22 @@
     <div class="container">
       <mat-form-field appearance="outline" class="item-30">
         <mat-label>Nome do fornecedor</mat-label>
-        <input matInput formControlName="name"/>
+        <input matInput formControlName="companyName"/>
         <mat-icon matSuffix>edit</mat-icon>
-        @if (fornecedorForm.controls['name'].hasError('required')) {
+        @if (fornecedorForm.controls['companyName'].hasError('required')) {
           <mat-error><strong>Nome é obrigatório!</strong></mat-error>
         }
-        @if (fornecedorForm.controls['name'].hasError('minlength')) {
+        @if (fornecedorForm.controls['companyName'].hasError('minlength')) {
           <mat-error><strong>Nome muito pequeno!</strong></mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="item-70">
-        <mat-label>Descrição do fornecedor</mat-label>
-        <input matInput formControlName="description"/>
+        <mat-label>Nome do Contato</mat-label>
+        <input matInput formControlName="contactName"/>
         <mat-icon matSuffix>edit</mat-icon>
-        @if (fornecedorForm.controls['description'].hasError('required')) {
-            <mat-error><strong>Descrição é obrigatório</strong></mat-error>
+        @if (fornecedorForm.controls['contactName'].hasError('required')) {
+            <mat-error><strong>Nome do contato é obrigatório</strong></mat-error>
         }
       </mat-form-field>
     </div>

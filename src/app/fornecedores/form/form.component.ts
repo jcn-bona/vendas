@@ -17,21 +17,19 @@ import { Fornecedor } from '../fornecedor.dto';
 })
 export class FornecedorFormComponent {
   @ViewChild('form') form : NgForm;
-
   @Output() save = new EventEmitter<Fornecedor>();
-
   @Output() back = new EventEmitter();
 
   private fb = inject(FormBuilder)
 
   fornecedorForm = this.fb.group({
     id: [null],
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    description: ['', Validators.required]
+    companyName: ['', [Validators.required, Validators.minLength(3)]],
+    contactName: ['', Validators.required]
   })
 
   @Input() set fornecedor(fornecedor: Fornecedor) {
-    this.fornecedorForm.setValue(fornecedor)
+    //this.fornecedorForm.setValue(fornecedor)
   };
 
   onSubmit(): void {

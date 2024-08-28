@@ -10,7 +10,6 @@ import { FornecedorFormComponent } from "./form/form.component";
 import { ConfirmationDialogService } from '../shared/dialog/confirmation-dialog.service';
 import { LoadingBarComponent } from "../shared/load-bar/loading-bar.component";
 import { Fornecedor } from '../fornecedores/fornecedor.dto'
-import { FornecedoresItem } from './fornecedores-datasource';
 import { FornecedorService } from './fornecedor.service';
 
 @Component({
@@ -20,16 +19,16 @@ import { FornecedorService } from './fornecedor.service';
   standalone: true,
   imports: [MaterialModule, FornecedorFormComponent, LoadingBarComponent]
 })
-export class CategoriasComponent implements AfterViewInit {
+export class FornecedoresComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<FornecedoresItem>;
+  @ViewChild(MatTable) table!: MatTable<Fornecedor>;
 
   dataSource = new MatTableDataSource<Fornecedor>();
   displayedColumns = ['id', 'companyName', 'contactName', 'action'];
-  showFormCategoria: boolean = false;
-  categoria!: Fornecedor;
+  showFormFornecedor: boolean = false;
+  fornecedor!: Fornecedor;
   checked: boolean = false;
   status: String = 'Listagem';
   showLoadingBar: boolean = true;
@@ -72,36 +71,48 @@ export class CategoriasComponent implements AfterViewInit {
 
   onEditFornecedorClick(fornecedor: Fornecedor): void {
     this.fornecedor = fornecedor;
-    this.showFormCategoria = true;
+    this.showFormFornecedor = true;
     this.checked = false;
     this.status = 'Edição'
   }
 
   ngAfterViewInit(): void {
-    this.loadCategorias();
+    this.loadFornecedores();
   }
 
-  async onSave(categoria: Categoria): Promise<void> {
-    const saved = await lastValueFrom(this.categoriaService.save(categoria));
-    this.loadCategorias();
+  async onSave(fornecedor: Fornecedor): Promise<void> {
+    const saved = await lastValueFrom(this.fornecedorService.save(fornecedor));
+    this.loadFornecedores();
   }
 
-  onNewCategoriaClick(): void {
-    if (this.showFormCategoria) {
-      this.showFormCategoria = false;
+  onNewFornecedorClick(): void {
+    if (this.showFormFornecedor) {
+      this.showFormFornecedor = false;
       this.status = 'Listagem';
     } else {
-      this.showFormCategoria = true;
-      this.categoria = {id: 0, name: '', description: ''}
+      this.showFormFornecedor = true;
+      this.fornecedor = {
+        id: 0,
+        companyName: '',
+        contactName: '',
+        contactTitle: '',
+        address: {
+          street: '',
+          city: '',
+          region: '',
+          postalCode: 0,
+          country: '',
+          phone: ''
+        }
+      }
       this.status = 'Inclusão';
     }
   }
 
-  async loadCategorias(): Promise<void> {
+  async loadFornecedores(): Promise<void> {
     this.showLoadingBar = true;
-
-    const categorias = await lastValueFrom(this.categoriaService.getAll());
-    this.dataSource = new MatTableDataSource(categorias);
+    const fornecedores = await lastValueFrom(this.fornecedorService.getAll());
+    this.dataSource = new MatTableDataSource(fornecedores);
     this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
