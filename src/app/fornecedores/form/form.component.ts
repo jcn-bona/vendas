@@ -1,3 +1,4 @@
+import { Address } from './../fornecedor.dto';
 import { Component, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, NgForm } from '@angular/forms';
 
@@ -24,8 +25,15 @@ export class FornecedorFormComponent {
 
   fornecedorForm = this.fb.group({
     id: [null],
-    companyName: ['', [Validators.required, Validators.minLength(3)]],
-    contactName: ['', Validators.required]
+    companyName: [ '', [Validators.required, Validators.minLength(3)] ],
+    contactName: [ '', Validators.required ],
+    contactTitle: [ '', Validators.required ],
+    street: [ '', Validators.required ],
+    city: [ '', Validators.required ],
+    region: [ '', Validators.required ],
+    postalCode: [ '', Validators.required ],
+    country: [ '', Validators.required ],
+    phone: [ '', Validators.required ],
   })
 
   @Input() set fornecedor(fornecedor: Fornecedor) {
